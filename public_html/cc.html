@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Woodmen Valley Chapel Closed Captioning</title>
+    <meta http-equiv="refresh" content="300;URL='http://ltl.cc/cc/'">
+    <script language="javascript" type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js"> </script>
+    <script type="text/javascript">
+        function hr() { $('stFrame').setStyle({ height: document.viewport.getHeight() + 'px' }); }
+        function start() { $('stFrame').src = location.protocol + '//www.streamtext.net/text.aspx' + location.search; hr(); }
+        Event.observe(window, "resize", hr);
+        document.observe('dom:loaded', start);
+    </script>
+    <style>
+		body {
+    		-webkit-user-select: none;
+			-khtml-user-drag: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-o-user-select: none;
+			user-select: none;
+			cursor:default;
+		}
+	</style>
+    <script type="text/javascript">
+		document.ondragstart = function() { return false };
+		document.onselectstart = function() { return false };
+	</script>        
+</head>
+<body style="margin:0;">
+    	<iframe id="stFrame" style="width:100%" scrolling="no" frameborder="0" marginheight="0px" marginwidth="0px">
+    	</iframe>
+</body>
+</html>
