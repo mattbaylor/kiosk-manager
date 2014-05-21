@@ -28,6 +28,7 @@ Basic Installation Instructions:
 3. in authUser add your Active Directory domain controllers. This tool uses an integrated login with Active Directory
 4. in application.php add the database connection details.
 5. point your web server root to the public_html folder. The lib area is included through requires.
-6. it should work, however your mileage may vary…
+6. point KioskPro’s remote settings location at http://yourserver/k?i=uniquekioskid
+7. it should work, however your mileage may vary…
 
 @mattbaylor
