@@ -8,6 +8,7 @@ Configuration Items:
 
 /lib/functions/authUser.php -> active directory domain controllers
 /lib/application.php -> add a case statement for your server to control DB connection (line 44)
+/lib/plugins/adLDAP.php -> line 87 account suffix; line 96 basedn; line 111 domain controllers; line 120 admin username; line 121 admin password 
 
 Expected Environment:
 
