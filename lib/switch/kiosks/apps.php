@@ -38,8 +38,10 @@ if(isset($_POST['submitButton'])) {
 				'pdfInfiniteScrollOrientation' => $_POST['pdfInfiniteScrollOrientation'],
 				'pdfBackgroundImageFile' => $_POST['pdfBackgroundImageFile'],
 				'cookieAcceptPolicy' => $_POST['cookieAcceptPolicy'],
-				'manualControlOfBrightness' => $_POST['manualControlOfBrightness']
+				'manualControlOfBrightness' => $_POST['manualControlOfBrightness'],
+				'accessJS_API' => $_POST['accessJS_API']
 			);
+			
 			if($_POST['showStatusBar'] == 'on') {
 				$data['showStatusBar'] = 1;
 			} else {
@@ -124,11 +126,6 @@ if(isset($_POST['submitButton'])) {
 				$data['showPrintIcon'] = 1;
 			} else {
 				$data['showPrintIcon'] = 0;
-			}
-			if($_POST['accessJS_API'] == 'on') {
-				$data['accessJS_API'] = 1;
-			} else {
-				$data['accessJS_API'] = 0;
 			}
 			$data['modifiedBy'] = $_COOKIE['username'];
 			$data['dateModified'] = date( 'Y-m-d H:i:s', time() );
@@ -169,7 +166,8 @@ if(isset($_POST['submitButton'])) {
 				'pdfInfiniteScrollOrientation' => $_POST['pdfInfiniteScrollOrientation'],
 				'pdfBackgroundImageFile' => $_POST['pdfBackgroundImageFile'],
 				'cookieAcceptPolicy' => $_POST['cookieAcceptPolicy'],
-				'manualControlOfBrightness' => $_POST['manualControlOfBrightness']
+				'manualControlOfBrightness' => $_POST['manualControlOfBrightness'],
+				'accessJS_API' => $_POST['accessJS_API']	
 			);
 			if($_POST['showStatusBar'] == 'on') {
 				$data['showStatusBar'] = 1;
@@ -256,11 +254,6 @@ if(isset($_POST['submitButton'])) {
 			} else {
 				$data['showPrintIcon'] = 0;
 			}
-			if($_POST['accessJS_API'] == 'on') {
-				$data['accessJS_API'] = 1;
-			} else {
-				$data['accessJS_API'] = 0;
-			}
 			$data['modifiedBy'] = $_COOKIE['username'];
 			$data['dateModified'] = date( 'Y-m-d H:i:s', time() );
 				
@@ -285,9 +278,10 @@ $apps = $wpdb->get_results($sql,ARRAY_A);
 
 foreach($apps as $app) {
 	extract($app);
+	$img = "data:".$mime.";base64," . base64_encode($thumb);
 	$appsOut .= <<<EOT
 <tr>
-	<td>$application_id</td>
+	<td><img height="150" src="$img"></td>
 	<td>$homePage</td>
 	<td>$description</td>
 	<td>$dateCreated</td>
@@ -564,9 +558,14 @@ EOT;
     <div class="col-xs-8">
       <input name="manualControlOfBrightness" id="manualControlOfBrightness" type="text" />
     </div>
-    <label for="accessJS_API" class="control-label col-xs-4">Allow application to access KioskPro JS API</label>
+    <label for="accessJS_API" class="control-label col-xs-4">JavaScript Execution Allowed:</label>
     <div class="col-xs-8">
-      <input type="checkbox" name="accessJS_API" id="accessJS_API" />
+    <select name="accessJS_API" id="accessJS_API">
+        <option selected></option>
+        <option value="0">By Injection</option>
+        <option value="1">By Import</option>
+        <option value="2">Never</option>
+      </select>
     </div>
   </fieldset>
   <input type="hidden" id="ID" name="ID" />
@@ -693,11 +692,6 @@ EOT;
 					} else {
 						$j('#showPrintIcon').attr('checked',false);
 					}
-					if(data[0].accessJS_API =='1'){
-						$j('#accessJS_API').attr('checked',true);
-					} else {
-						$j('#accessJS_API').attr('checked',false);
-					}
 					$j('#homePage').val(data[0].homePage);
 					$j('#description').val(data[0].description);
 					$j('#whiteList').val(data[0].whiteList);
@@ -730,6 +724,7 @@ EOT;
 					$j('#pdfBackgroundImageFile').val(data[0].pdfBackgroundImageFile);
 					$j('#cookieAcceptPolicy').val(data[0].cookieAcceptPolicy);
 					$j('#manualControlOfBrightness').val(data[0].manualControlOfBrightness);
+					$j('#accessJS_API').val(data[0].accessJS_API);
 				});
 			});
 		
@@ -831,11 +826,6 @@ EOT;
 					} else {
 						$j('#showPrintIcon').attr('checked',false);
 					}
-					if(data[0].accessJS_API =='1'){
-						$j('#accessJS_API').attr('checked',true);
-					} else {
-						$j('#accessJS_API').attr('checked',false);
-					}
 					$j('#homePage').val(data[0].homePage);
 					$j('#description').val(data[0].description);
 					$j('#whiteList').val(data[0].whiteList);
@@ -868,6 +858,7 @@ EOT;
 					$j('#pdfBackgroundImageFile').val(data[0].pdfBackgroundImageFile);
 					$j('#cookieAcceptPolicy').val(data[0].cookieAcceptPolicy);
 					$j('#manualControlOfBrightness').val(data[0].manualControlOfBrightness);
+					$j('#accessJS_API').val(data[0].accessJS_API);
 					
 					
 					
